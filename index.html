@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+  <meta charset ="UTF-8">
+  <meta http-equive ="X-UA-Compatible" content "IE=edge">
+  <meta name ="viewport" content="width = device-width, initial-scale=1.0">
+  <title>TUFIQoE PIQ</title>
+
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body>
+    <img src="http://pbz.kt.agh.edu.pl/~testySubiektywne/TUFIQoEMOS/Data/Landscapes/Landscapes_001_h.jpg">
+    <p>What is your MOS?</p>
+    <form onsubmit="return false">
+        <select name="mos" id="mos">
+            <option value="0">Choose!</option>
+            <option value="5">Excellent</option>
+            <option value="4">Good</option>
+            <option value="3">Fair</option>
+            <option value="2">Poor</option>
+            <option value="1">Bad</option>
+        </select>
+        <input pys-onClick="sub" type="submit" id="btn-form" value="submit">
+    </form>
+    <p id = 'output'></p>
+    <py-script>
+        i = 0
+        path = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/TUFIQoEMOS/Data/Landscapes/'
+        srcs = (
+            'Landscapes_001_h.jpg',
+            'Landscapes_002_h.jpg',
+            'Landscapes_011_h.jpg',
+            'Landscapes_004_h.jpg',
+            'Landscapes_005_h.jpg',
+            'Landscapes_006_h.jpg',
+            'Landscapes_007_h.jpg',
+            'Landscapes_008_h.jpg',
+            'Landscapes_009_h.jpg',
+            'Landscapes_010_h.jpg',
+        )
+
+        def sub(*args,**kwargs):
+            global i
+            result_place = Element('output')
+            result_place.write(f"Last MOS was: {Element('mos').value}")
+            i += 1
+            document.querySelector("img").setAttribute("src", path+srcs[i])
+    </py-script>
+</body>
+</html>
