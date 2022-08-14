@@ -44,6 +44,7 @@ for hrc_key in hrc:
             if abs(desired_metric-metric_values[metric_i]) < distance:
                 distance = abs(desired_metric - metric_values[metric_i])
                 distance_i = metric_i
-        os.system(f'cp "os.path.join('tmp', f'{src_no_ext}_{metric_i}.jpg')" "{src_no_ext}_{hrc_key}.jpg"')
+        pvs_file = os.path.join('tmp', f'{src_no_ext}_{distance_i}.jpg')
+        os.system(f'cp "{pvs_file}" "{src_no_ext}_{hrc_key}.jpg"')
         print(distance_i, distance)
 
