@@ -38,13 +38,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/tmp/output.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/vmaf.csv">
           <value>
             <Attribute>
