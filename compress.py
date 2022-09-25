@@ -4,7 +4,10 @@ import pyiqa
 import sys
 import torchvision.transforms as transforms
 from PIL import Image
-src = 'Lenna_(test_image).png'
+
+src_list = ['Lenna_(test_image).png', 'NAPS_H/People_001_h.jpg']
+
+src = src_list[1]
 
 # metric = 'vmaf'
 # hrc = {
@@ -25,6 +28,15 @@ hrc = {
 }
 
 src_no_ext = src[:src.find('.')]
+slash_pos = src_no_ext.rfind('/')
+if slash_pos > -1:
+    src_past_slash_no_ext = src_no_ext[slash_pos+1:]
+else:
+    src_past_slash_no_ext = src_no_ext
+
+print(src_no_ext)
+print(src_past_slash_no_ext)
+sys.exit(0)
 
 # Create VIF metric with default setting
 vif_metric = pyiqa.create_metric('vif')
