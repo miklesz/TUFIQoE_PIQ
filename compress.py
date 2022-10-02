@@ -106,6 +106,8 @@ for src in src_list[:1]:
         if desired_metric is None:
             os.system(f'cp "{SRC_PATH}/{src}" "{PVS_PATH}/{src_no_ext}_{hrc_key}.jpg"')
             print(f'hrc_key = {hrc_key}, desired_metric = {desired_metric}')
+            with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as f:
+                f.write(f'{src},{hrc_key},1,1,None,0\n')
         else:
             distance = abs(desired_metric-metric_values[0])
             distance_index = 0
