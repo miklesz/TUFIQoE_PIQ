@@ -21,7 +21,7 @@ src_list = sorted([src[len(SRC_PATH)+1:] for src in src_list])
 with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as f:
     f.write('src,hrc_key,desired_metric,achieved_metric,distance_index,distance\n')
 
-for src in src_list[:1]:
+for src in src_list[:]:
 
     print(f'src = {src}')
     # src = src_list[2]
