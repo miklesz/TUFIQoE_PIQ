@@ -1,6 +1,7 @@
 # Standard library imports
 import csv
 import glob
+import sys
 
 # Related third party imports
 from PIL import Image
@@ -25,6 +26,8 @@ print(models)
 
 # create metrics with default setting
 iqa_metrics = [pyiqa.create_metric(iqa_metric) for iqa_metric in models]
+print(iqa_metrics)
+sys.exit()
 
 to_tensor = transforms.ToTensor()
 
