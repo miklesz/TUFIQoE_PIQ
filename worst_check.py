@@ -10,10 +10,11 @@ def print_write(string, write_f):
     write_f.write(f'{string}\n')
 
 
-vif_metric = pyiqa.create_metric('vif')
+# vif_metric = pyiqa.create_metric('vif')
+mad_metric = pyiqa.create_metric('mad')
 to_tensor = transforms.ToTensor()
-with open('worst/worst_check.csv', 'w') as f:
-    print_write('src_name,pvs_name,vmaf,vif', f)
+with open('worst/worst_mad_check.csv', 'w') as f:
+    print_write('src_name,pvs_name,vmaf,mad', f)
     for pvs_name in [glob.glob(f'worst/People_{number:03d}_*')[0] for number in range(1, 250+1)]:  # 250+1
         src_name = 'NAPS_H' + pvs_name[5:]
         os.system(f'ffmpeg -y -i "{src_name}" -pix_fmt yuv444p tmp/reference.y4m')
@@ -28,7 +29,7 @@ with open('worst/worst_check.csv', 'w') as f:
         d = Image.open(pvs_name).convert('RGB')
         d_tensor = to_tensor(d)
         d_tensor = d_tensor.unsqueeze(0)
-        score_tensor = vif_metric(r_tensor, d_tensor)
-        vif= score_tensor.item()
+        score_tensor = mad_metric(r_tensor, d_tensor)
+        mad = score_tensor.item()
 
-        print_write(f'{src_name},{pvs_name},{vmaf},{vif}', f)
+        print_write(f'{src_name},{pvs_name},{vmaf},{mad}', f)
