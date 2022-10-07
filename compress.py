@@ -1,4 +1,5 @@
 import glob
+import math
 import os
 # import pickle
 import pyiqa
@@ -6,9 +7,39 @@ import sys
 import torchvision.transforms as transforms
 from PIL import Image
 
+
 # Constants
 SRC_PATH = 'src'
 PVS_PATH = 'pvs'
+
+
+# Functions
+def half_third_f(x):
+    # print(int(x*4))
+    return (0, 1/(2.5*2.5*2.5), 1/(2.5*2.5), 1/2.5)[int(x*4)]
+
+
+def third_f(x):
+    # print(int(x*4))
+    return (0, 1/(3*3*3), 1/(3*3), 1/3)[int(x*4)]
+
+
+def half_f(x):
+    # print(int(x*4))
+    return (0, 1/8, 1/4, 1/2)[int(x*4)]
+
+
+def exp_f(x):
+    return (math.exp(x)-1)/(math.e-1)
+
+
+def lin_f(x):
+    return x
+
+
+def f(x):
+    return half_third_f(x)
+
 
 # src_list = ['Lenna_(test_image).png', 'People_001_h.jpg', 'People_160_h.jpg']
 
@@ -18,10 +49,14 @@ src_list = sorted([src[len(SRC_PATH)+1:] for src in src_list])
 # print(src_list)
 # sys.exit()
 
-with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as f:
-    f.write('src,hrc_key,desired_metric,achieved_metric,distance_index,distance\n')
+for i in (0.00, 0.25, 0.50, 0.75):
+    print(f(i))
+# sys.exit()
 
-for src in src_list[:]:
+with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
+    file.write('src,hrc_key,desired_metric,achieved_metric,distance_index,distance\n')
+
+for src in src_list[164+2:]:
 
     print(f'src = {src}')
     # src = src_list[2]
@@ -38,11 +73,18 @@ for src in src_list[:]:
     metric = 'vif'
     hrc = {
         'A': None,
-        'B': (1-0.1611954868)*.75+0.1611954868,
-        'C': (1-0.1611954868)*.50+0.1611954868,
-        'D': (1-0.1611954868)*.25+0.1611954868,
-        'E': (1-0.1611954868)*.00+0.1611954868,
+        'B': (1-0.1611954868)*f(.75)+0.1611954868,
+        'C': (1-0.1611954868)*f(.50)+0.1611954868,
+        'D': (1-0.1611954868)*f(.25)+0.1611954868,
+        'E': (1-0.1611954868)*f(.00)+0.1611954868,
     }
+    # hrc = {
+    #     'A': None,
+    #     'B': (1-0.1611954868)*.75+0.1611954868,
+    #     'C': (1-0.1611954868)*.50+0.1611954868,
+    #     'D': (1-0.1611954868)*.25+0.1611954868,
+    #     'E': (1-0.1611954868)*.00+0.1611954868,
+    # }
 
     # print(hrc)
     # sys.exit()
@@ -65,8 +107,8 @@ for src in src_list[:]:
     # sys.exit()
 
     # Main compress and metric loop
-    for f in os.listdir('tmp'):
-        os.remove(os.path.join('tmp', f))
+    for f_tmp in os.listdir('tmp'):
+        os.remove(os.path.join('tmp', f_tmp))
     metric_values = []
     image = Image.open(f'{SRC_PATH}/{src}')
 
@@ -106,8 +148,8 @@ for src in src_list[:]:
         if desired_metric is None:
             os.system(f'cp "{SRC_PATH}/{src}" "{PVS_PATH}/{src_no_ext}_{hrc_key}.jpg"')
             print(f'hrc_key = {hrc_key}, desired_metric = {desired_metric}')
-            with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as f:
-                f.write(f'{src},{hrc_key},1,1,None,0\n')
+            with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
+                file.write(f'{src},{hrc_key},1,1,None,0\n')
         else:
             distance = abs(desired_metric-metric_values[0])
             distance_index = 0
@@ -121,6 +163,6 @@ for src in src_list[:]:
             os.system(f'cp "{pvs_file}" "{PVS_PATH}/{src_no_ext}_{hrc_key}.jpg"')
             print(f'hrc_key = {hrc_key}, desired_metric = {desired_metric}, achieved_metric = {achieved_metric}, '
                   f'distance_index = {distance_index}, distance = {distance}')
-            with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as f:
-                f.write(f'{src},{hrc_key},{desired_metric},{achieved_metric},{distance_index},{distance}\n')
+            with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
+                file.write(f'{src},{hrc_key},{desired_metric},{achieved_metric},{distance_index},{distance}\n')
 sys.exit()
