@@ -118,7 +118,7 @@ for src in src_list[164+2:]:
             pvs = os.path.join('tmp', f'{src_no_ext}_{q}.jpg')
             image.save(pvs, 'JPEG', quality=q)
             os.system(f'ffmpeg -y -i "{pvs}" -pix_fmt yuv444p tmp/dis.y4m')
-            os.system('vmaf -r tmp/ref.y4m -d tmp/dis.y4m -o tmp/output.csv --csv --feature vif --threads 8')
+            os.system('vmaf -r tmp/ref.y4m -d tmp/dis.y4m -no tmp/output.csv --csv --feature vif --threads 8')
             with open('tmp/output.csv') as vmaf_file:
                 metric_values.append(float(vmaf_file.read().split(',')[-2]))
         # with open('metric_values', 'wb') as metric_values_file:
