@@ -13,7 +13,7 @@ for distorted_filename in glob.glob('TUFIQoEMOS_final/*'):
     filename = distorted_filename[17:]
     reference_filename = 'NAPS_H/'+filename[:-6]+'.jpg'
     os.system(f'ffmpeg -y -i {reference_filename} tmp/reference.y4m')
-    os.system('vmaf -r tmp/reference.y4m -d tmp/distorted.y4m -o tmp/output.csv --csv --threads 8')
+    os.system('vmaf -r tmp/reference.y4m -d tmp/distorted.y4m -no tmp/output.csv --csv --threads 8')
     with open('tmp/output.csv') as vmaf_file:
         vmaf = vmaf_file.read().split(',')[-2]
     with open(file='vmaf.csv', mode='a') as piq_file:
