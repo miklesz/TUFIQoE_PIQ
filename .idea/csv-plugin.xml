@@ -52,6 +52,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/pvs_exp/pvs_stats.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/pvs_half/pvs_stats.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/pvs_linear/pvs_stats.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/pvs_third/pvs_stats.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/vmaf.csv">
           <value>
             <Attribute>
