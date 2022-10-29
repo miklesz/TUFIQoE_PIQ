@@ -19,7 +19,7 @@ with open('worst/best_mad_check.csv', 'w') as f:
         src_name = 'NAPS_H' + pvs_name[6:]
         # os.system(f'ffmpeg -y -i "{src_name}" -pix_fmt yuv444p tmp/reference.y4m')
         # os.system(f'ffmpeg -y -i "{pvs_name}" -pix_fmt yuv444p tmp/distorted.y4m')
-        # os.system('vmaf -r tmp/reference.y4m -d tmp/distorted.y4m -o tmp/output.csv --csv --feature vif --threads 8')
+        # os.system('vmaf -r tmp/reference.y4m -d tmp/distorted.y4m -no tmp/output.csv --csv --feature vif --threads 8')
         # with open('tmp/output.csv') as vmaf_file:
         #     vmaf = float(vmaf_file.read().split(',')[-2])
         vmaf = None
