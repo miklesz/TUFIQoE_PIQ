@@ -5,7 +5,7 @@ import requests
 
 # Constants
 URL = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/PIQMOS/config/src.csv'
-SERIES = 1
+SERIES = 400
 LEVELS = ('A', 'B', 'C', 'D', 'E')
 
 
@@ -15,15 +15,24 @@ def print_write(file_object, line):
     file_object.write(f'{line}\n')
 
 
-srcs = [line.split(',')[0] for line in str(requests.get(URL).content).split('\\n')[1:-1]]
+# Main
+lines = str(requests.get(URL).text).split('\n')[1:]
+if not lines[-1]:
+    lines.pop()
+print("BEGIN DOWNLOAD")
+print(lines)
+print('END DOWNLOAD')
+srcs = [line.split(',')[0] for line in lines]
+dots = [srcs[i].rfind('.') for i in range(len(srcs))]
 no = 0
 with open('orders.csv', 'w') as file:
     print_write(file, f'no,{",".join(srcs)}')
     for five_id in range(SERIES):
-        versions = [random.sample(LEVELS, len(LEVELS)) for src in srcs]
-        for in_five_id in range(5):
+        hrcs = [random.sample(LEVELS, len(LEVELS)) for src in srcs]
+        for hrc in range(5):
             print_write(
                 file,
-                f'{no},{",".join([srcs[i][:srcs[i].rfind(".")] + "_" + versions[i][in_five_id] + ".jpg" for i in range(len(srcs))])}'
+                # f'{no},{",".join([srcs[i][:dots[i]]+"_"+hrcs[i][hrc]+srcs[i][dots[i]:] for i in range(len(srcs))])}'
+                f'{no},{",".join([hrcs[i][hrc] for i in range(len(srcs))])}'
             )
             no += 1
