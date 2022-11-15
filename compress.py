@@ -1,5 +1,5 @@
 import glob
-import math
+# import math
 import os
 # import pickle
 import pyiqa
@@ -9,36 +9,21 @@ from PIL import Image
 
 
 # Constants
-SRC_PATH = 'src'
+FACTOR = 2
 PVS_PATH = 'pvs'
+SRC_PATH = 'src'
 
 
 # Functions
-def half_third_f(x):
-    # print(int(x*4))
-    return (0, 1/(2.5*2.5*2.5), 1/(2.5*2.5), 1/2.5)[int(x*4)]
-
-
-def third_f(x):
-    # print(int(x*4))
-    return (0, 1/(3*3*3), 1/(3*3), 1/3)[int(x*4)]
-
-
-def half_f(x):
-    # print(int(x*4))
-    return (0, 1/8, 1/4, 1/2)[int(x*4)]
-
-
-def exp_f(x):
-    return (math.exp(x)-1)/(math.e-1)
-
-
-def lin_f(x):
-    return x
-
-
 def f(x):
-    return half_third_f(x)
+    return (
+        0,
+        1 / FACTOR ** 5,
+        1 / FACTOR ** 4,
+        1 / FACTOR ** 3,
+        1 / FACTOR ** 2,
+        1 / FACTOR ** 1,
+    )[int(x * 6)]
 
 
 # src_list = ['Lenna_(test_image).png', 'People_001_h.jpg', 'People_160_h.jpg']
@@ -49,34 +34,38 @@ src_list = sorted([src[len(SRC_PATH)+1:] for src in src_list])
 # print(src_list)
 # sys.exit()
 
-for i in (0.00, 0.25, 0.50, 0.75):
-    print(f(i))
+# for i in (0.00, 0.25, 0.50, 0.75):
+for i in (0/6, 1/6, 2/6, 3/6, 4/6, 5/6):
+    print(i, f(i))
 # sys.exit()
 
 with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
     file.write('src,hrc_key,desired_metric,achieved_metric,distance_index,distance\n')
 
-for src in src_list[164+2:]:
+# Interesting pictures:
+# - People_027_h
+# - People_197_h
+# - People_156_h
+# - People_160_h
+# - People_087_h
+# - People_177_h
+
+# for src in src_list[164+2:]:
+# for src in src_list:
+for src in src_list[177+1:177+1+1]:
 
     print(f'src = {src}')
     # src = src_list[2]
 
-    # metric = 'vmaf'
-    # hrc = {
-    #     'A': None,
-    #     'B': 80,
-    #     'C': 60,
-    #     'D': 40,
-    #     'E': 20,
-    # }
-
     metric = 'vif'
     hrc = {
         'A': None,
-        'B': (1-0.1611954868)*f(.75)+0.1611954868,
-        'C': (1-0.1611954868)*f(.50)+0.1611954868,
-        'D': (1-0.1611954868)*f(.25)+0.1611954868,
-        'E': (1-0.1611954868)*f(.00)+0.1611954868,
+        'B': (1 - 0.1611954868) * f(5 / 6) + 0.1611954868,
+        'C': (1 - 0.1611954868) * f(4 / 6) + 0.1611954868,
+        'D': (1 - 0.1611954868) * f(3 / 6) + 0.1611954868,
+        'E': (1 - 0.1611954868) * f(2 / 6) + 0.1611954868,
+        'F': (1 - 0.1611954868) * f(1 / 6) + 0.1611954868,
+        'G': (1 - 0.1611954868) * f(0 / 6) + 0.1611954868,
     }
     # hrc = {
     #     'A': None,
