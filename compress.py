@@ -9,7 +9,7 @@ from PIL import Image
 
 
 # Constants
-FACTOR = 2
+FACTOR = 2 ** 0.5
 PVS_PATH = 'pvs'
 SRC_PATH = 'src'
 
@@ -36,7 +36,7 @@ src_list = sorted([src[len(SRC_PATH)+1:] for src in src_list])
 
 # for i in (0.00, 0.25, 0.50, 0.75):
 for i in (0/6, 1/6, 2/6, 3/6, 4/6, 5/6):
-    print(i, f(i))
+    print(f'{round(i, 1)}\t{f(i)}')
 # sys.exit()
 
 with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
@@ -50,9 +50,23 @@ with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
 # - People_087_h
 # - People_177_h
 
-# for src in src_list[164+2:]:
-# for src in src_list:
-for src in src_list[177+1:177+1+1]:
+# my_src_list = src_list[164+2:]:
+# my_src_list = src_list:
+# my_src_list = [
+#     src_list[0],
+#     src_list[1],
+#     src_list[27 + 1],
+#     src_list[197 + 1],
+#     src_list[156 + 1],
+#     src_list[160 + 1],
+#     src_list[87 + 1],
+#     src_list[177 + 1],
+# ]
+my_src_list = [
+    src_list[1 + 1],
+]
+
+for src in my_src_list:
 
     print(f'src = {src}')
     # src = src_list[2]
