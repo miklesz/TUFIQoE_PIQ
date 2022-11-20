@@ -6,7 +6,7 @@ import requests
 # Constants
 URL = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/PIQMOS/config/src.csv'
 SERIES = 400
-LEVELS = ('A', 'B', 'C', 'D', 'E')
+LEVELS = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
 
 
 # Functions
@@ -29,7 +29,7 @@ with open('orders.csv', 'w') as file:
     print_write(file, f'no,{",".join(srcs)}')
     for five_id in range(SERIES):
         hrcs = [random.sample(LEVELS, len(LEVELS)) for src in srcs]
-        for hrc in range(5):
+        for hrc in range(7):
             print_write(
                 file,
                 # f'{no},{",".join([srcs[i][:dots[i]]+"_"+hrcs[i][hrc]+srcs[i][dots[i]:] for i in range(len(srcs))])}'
