@@ -12,19 +12,28 @@ def make_chart(my_pvs_col_id, my_naps_col_id):
     else:
         naps_col_name = naps_lines[2].split(';')[my_naps_col_id]
     # print(naps_col_name)
-    chart_name = f'{naps_col_name}({pvs_col_name})'
+    chart_name = f'{pvs_col_name}({naps_col_name})'
     print(chart_name)
 
-    return
+    # return
     chart_data = []
     for pvs_line in pvs_lines[1:]:
         pvs_line_elements = pvs_line.split(',')
         try:
             naps_id = naps_ids.index(pvs_line_elements[0][:-4])
         except ValueError as err:
-            print(err)
+            # print(err)
+            pass
         else:
-            print(pvs_line_elements[0], naps_id)
+            print()
+            naps_line = naps_lines[naps_id]
+            naps_line_elements = naps_line.split(';')
+            print(pvs_line_elements)
+            print(naps_line_elements)
+            print(pvs_line_elements[my_pvs_col_id], naps_line_elements[my_naps_col_id])
+            # print(pvs_line_elements[0], naps_ids[naps_id])
+            # print(pvs_line_elements[my_pvs_col_id], naps_id)
+    # quit()
 
 
 with open('pvs/pvs_stats.csv') as pvs_file:
