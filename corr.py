@@ -4,6 +4,7 @@ import sys
 
 # Library imports
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 # Functions
@@ -55,6 +56,11 @@ def make_chart(my_pvs_col_id, my_naps_col_id):
     plt.savefig(f'scatter_plots/{chart_name}.png')
     # plt.show()
     plt.clf()
+    r = np.corrcoef(chart_x, chart_y)
+    pearson = r[0, 1]
+    # print(pearson)
+    with open('scatter_plots/scatter_plots_correlation.csv', 'a') as corr_file:
+        corr_file.write(f'{pvs_col_name},{naps_col_name},*,{pearson}\n')
 
 
 with open('pvs/pvs_stats_old.csv') as pvs_file:
@@ -65,6 +71,8 @@ with open('13428_2013_379_MOESM1_ESM.csv') as naps_file:
 naps_ids = [naps_id.split(';')[0] for naps_id in naps_lines]
 # print(naps_ids)
 
+with open('scatter_plots/scatter_plots_correlation.csv', 'w') as corr_file:
+    corr_file.write('pvs_parameter,naps_parameter,level,pearson\n')
 
 pvs_col_ids = [2, 3, 4, 5]
 naps_col_ids = [17, 19, 21, 25, 26, 27, 28, 29, 30, 31]
