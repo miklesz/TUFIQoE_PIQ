@@ -106,3 +106,4 @@ naps_col_ids = [17, 19, 21, 25, 26, 27, 28, 29, 30, 31]
 for pvs_col_id in pvs_col_ids:
     for naps_col_id in naps_col_ids:
         make_chart(pvs_col_id, naps_col_id)
+        # print(naps_col_id)
