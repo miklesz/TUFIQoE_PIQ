@@ -9,7 +9,7 @@ from PIL import Image
 
 
 # Constants
-FACTOR = 2 ** 0.5
+FACTOR = 2 ** 0.75
 PVS_PATH = 'pvs'
 SRC_PATH = 'src'
 
@@ -55,6 +55,7 @@ with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
 # my_src_list = [
 #     src_list[0],
 #     src_list[1],
+#     src_list[1 + 1],
 #     src_list[27 + 1],
 #     src_list[197 + 1],
 #     src_list[156 + 1],
@@ -63,7 +64,14 @@ with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
 #     src_list[177 + 1],
 # ]
 my_src_list = [
-    src_list[1 + 1],
+    src_list[0],
+    src_list[1],
+    src_list[27 + 1],
+    src_list[197 + 1],
+    src_list[156 + 1],
+    src_list[160 + 1],
+    src_list[87 + 1],
+    src_list[177 + 1],
 ]
 
 for src in my_src_list:
