@@ -51,7 +51,7 @@ with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
 # - People_177_h
 
 # my_src_list = src_list[164+2:]:
-# my_src_list = src_list:
+my_src_list = src_list
 # my_src_list = [
 #     src_list[0],
 #     src_list[1],
@@ -63,16 +63,16 @@ with open(f'{PVS_PATH}/pvs_stats.csv', 'a') as file:
 #     src_list[87 + 1],
 #     src_list[177 + 1],
 # ]
-my_src_list = [
-    src_list[0],
-    src_list[1],
-    src_list[27 + 1],
-    src_list[197 + 1],
-    src_list[156 + 1],
-    src_list[160 + 1],
-    src_list[87 + 1],
-    src_list[177 + 1],
-]
+# my_src_list = [
+#     src_list[0],
+#     src_list[1],
+#     src_list[27 + 1],
+#     src_list[197 + 1],
+#     src_list[156 + 1],
+#     src_list[160 + 1],
+#     src_list[87 + 1],
+#     src_list[177 + 1],
+# ]
 
 for src in my_src_list:
 
