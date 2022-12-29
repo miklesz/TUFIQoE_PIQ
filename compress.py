@@ -10,8 +10,8 @@ from PIL import Image
 
 # Constants
 FACTOR = 2 ** 0.75
-PVS_PATH = 'pvs'
-SRC_PATH = 'src'
+PVS_PATH = 'pvs_svga'
+SRC_PATH = 'src_svga'
 
 
 # Functions
