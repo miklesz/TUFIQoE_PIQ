@@ -4,8 +4,9 @@ import requests
 
 
 # Constants
-URL = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/PIQMOS/config/src.csv'
-SERIES = 400
+# URL = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/PIQMOS/config/src.csv'
+URL = 'http://pbz.kt.agh.edu.pl/~testySubiektywne/PIQMOS/config/src_internal.csv'
+SERIES = 1000
 LEVELS = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
 
 
